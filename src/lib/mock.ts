@@ -32,8 +32,9 @@ export function buildPlan(index: number): PlanResponse {
         soldOut: e.availability === "Sold out",
         dayPlan: [
           { day: e.date, plan: `${e.startTime} start · ${e.meetingPoint}` },
-          // The sheet only has a Saturday slot; Sunday is the checkout day.
-          { day: s.checkOut, plan: "Slow morning, then checkout" },
+          // The Experiences sheet has no Sunday slot (one Date column, all rows Sat 12 Apr).
+          // Filler is allowed for empty fields, so say plainly that nothing is planned.
+          { day: s.checkOut, plan: "No activity planned in the content pack · checkout day", filler: true },
         ],
       },
     },

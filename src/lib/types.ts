@@ -12,6 +12,8 @@ export type StayDetails = {
 export type DayPlanEntry = {
   day: string; // ISO date
   plan: string;
+  /** True when the workbook has no value for this day and the text is placeholder filler. */
+  filler?: boolean;
 };
 
 export type ExperienceDetails = {

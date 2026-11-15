@@ -56,7 +56,9 @@ export function ExperienceCard({ d }: { d: ExperienceDetails }) {
               <span className="inline-block rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-violet-700">
                 {formatDayLabel(entry.day)}
               </span>
-              <p className="mt-1 text-xs leading-relaxed text-neutral-700">{entry.plan}</p>
+              <p className={`mt-1 text-xs leading-relaxed ${entry.filler ? "italic text-neutral-400" : "text-neutral-700"}`}>
+                {entry.plan}
+              </p>
             </li>
           ))}
         </ul>
