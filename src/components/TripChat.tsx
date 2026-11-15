@@ -31,6 +31,18 @@ export default function TripChat() {
   const rowIndex = useRef(0); // which spreadsheet row the next successful reply uses
   const failPending = useRef(false); // ?fail=once → first request fails
   const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const wasBusy = useRef(false);
+
+  // The input is disabled while busy. Once the reply lands (cards or error) and the box is
+  // enabled again, put the cursor back — on desktop only, so phones don't pop the keyboard
+  // over the new cards.
+  useEffect(() => {
+    if (wasBusy.current && !busy && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      inputRef.current?.focus({ preventScroll: true });
+    }
+    wasBusy.current = busy;
+  }, [busy]);
 
   useEffect(() => {
     failPending.current = new URLSearchParams(window.location.search).get("fail") === "once";
@@ -185,18 +197,22 @@ export default function TripChat() {
             e.preventDefault();
             send(input);
           }}
-          className="flex items-center gap-2 rounded-full border border-neutral-300 bg-white py-1.5 pl-4 pr-1.5 focus-within:border-neutral-500"
+          className={`flex items-center gap-2 rounded-full border border-neutral-300 py-1.5 pl-4 pr-1.5 transition-colors focus-within:border-neutral-500 ${
+            busy ? "bg-neutral-100" : "bg-white"
+          }`}
         >
           <label htmlFor="prompt" className="sr-only">
             Message
           </label>
           <input
+            ref={inputRef}
             id="prompt"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask for a Kyoto weekend plan…"
+            disabled={busy}
+            placeholder={busy ? "Planning your trip…" : "Ask for a Kyoto weekend plan…"}
             autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-neutral-400"
+            className="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-neutral-400 disabled:cursor-not-allowed"
           />
           <button
             type="submit"
