@@ -27,3 +27,5 @@ Run `npm install && npm run dev` (Node.js 20 or newer), then open http://localho
 | `src/components/TripChat.tsx` | The chat page |
 
 Built with Next.js, TypeScript and Tailwind CSS. The content pack has no photo URLs, so the cards show placeholder image boxes.
+
+**Commit history exception:** the three-card happy path and the error path both landed in one commit, `5f9dabf`, instead of separate commits; the commits after it are fixes and README updates.
