@@ -8,20 +8,13 @@ A clickable prototype of a trip-planner chat for one two-night weekend in Kyoto 
 
 - **Three cards per reply**, in this order: stay, experience, food.
 - **Different data every prompt.** Prompt 1 uses row 1 of each sheet in the content pack, prompt 2 uses row 2, and so on, starting again after row 4.
-- **Thinking animation** for about 1.4 seconds before each reply.
+- **Thinking animation** for about 1.4 seconds before each reply. The text box locks while it plays and unlocks when the cards or the error bubble appear; on desktop the cursor goes back into the box.
 - **Responsive layout.** On desktop (1024px and wider) the cards sit left to right; on phones they stack top to bottom.
 - **Error bubble.** Add `?fail=once` to the address: the first request fails and shows a *Try again* button, which resends the same request.
 
 ## Run it
 
-Needs Node.js 20 or newer.
-
-```bash
-npm install
-npm run dev
-```
-
-Then open http://localhost:3000.
+Run `npm install && npm run dev` (Node.js 20 or newer), then open http://localhost:3000.
 
 ## Where things are
 
